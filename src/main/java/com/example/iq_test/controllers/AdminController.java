@@ -74,18 +74,6 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     @GetMapping("/admin/teachers")
     public String getAllTeachers(Model model)
     {
