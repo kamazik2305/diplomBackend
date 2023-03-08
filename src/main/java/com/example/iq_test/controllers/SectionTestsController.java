@@ -27,10 +27,8 @@ public class SectionTestsController {
 
 
     @PostMapping("/test-sections/add")
-    public String addSectionTest(@RequestBody SectionTestDto sectionTestDto)
-    {
-        sectionTestService.addTestSection(sectionTestDto);
-        return "section added";
+    public SectionTestDto addSectionTest(@RequestBody SectionTestDto sectionTestDto) {
+        return sectionTestService.addTestSection(sectionTestDto);
     }
 
     @PutMapping("/test-sections/update/{id_section}")
@@ -41,16 +39,10 @@ public class SectionTestsController {
     }
 
     @DeleteMapping("/test-sections/delete/{id_section}")
-    public String deleteSectionTest(@PathVariable(value = "id_section") long idSection)
+    public ResponseEntity deleteSectionTest(@PathVariable(value = "id_section") long idSection)
     {
         sectionTestService.deleteSection(idSection);
-        return "section deleted";
-    }
-
-    @PostMapping("/test-sections/search")
-    public List<SectionTestDto> findSectionByTitle(@RequestParam String searchString)
-    {
-        return sectionTestService.findTestSectionsBySearchString(searchString);
+        return ResponseEntity.ok("section deleted");
     }
 
 }
