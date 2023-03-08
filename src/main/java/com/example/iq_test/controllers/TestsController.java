@@ -45,7 +45,7 @@ public class TestsController {
     }
 
     @PostMapping("/test-sections/{id_section}/add")
-    public String addTestTosection(@RequestBody TestDto testDto,
+    public String addTestToSection(@RequestBody TestDto testDto,
                                    @PathVariable(value = "id_section") long idSection)
     {
         testService.addTestToSection(testDto, idSection);

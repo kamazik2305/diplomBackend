@@ -29,7 +29,7 @@ public class MainController {
         return "home/homepage";
     }
 
-    @PostMapping("/search-result")
+    @PostMapping("/test-sections/search")
     public List<SectionTestDto> searchSections(@RequestParam String searchString)
     {
         return sectionTestService.findTestSectionsBySearchString(searchString);

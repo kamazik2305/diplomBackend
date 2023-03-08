@@ -10,4 +10,5 @@ import java.util.List;
 public interface TestRepository extends JpaRepository<Test, Long> {
     List<Test> findAllBySectionTest(SectionTest sectionTest);
     List<Test> findAllByTestNameContains(@Param("searchString") String searchString);
+    boolean existsByTestNameAndSectionTest(String testName, SectionTest sectionTest);
 }

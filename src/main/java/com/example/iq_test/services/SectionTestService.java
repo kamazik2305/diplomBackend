@@ -22,18 +22,6 @@ public class SectionTestService {
         return sectionTestRepository.findAll();
     }
 
-    public void findAllSectionsDto()
-    {
-        sectionTestRepository
-                .findAll()
-                .stream()
-                .map(sectionTest -> SectionTestDto.builder()
-                        .id(sectionTest.getId())
-                        .testSectionTitle(sectionTest.getTestSectionTitle())
-                        .build())
-                .toList();
-    }
-
     public List<SectionTestDto> findAllTestSectionsDto()
     {
         return  sectionTestRepository
@@ -65,6 +53,10 @@ public class SectionTestService {
     public SectionTestDto addTestSection(SectionTestDto sectionTestDto)
     {
 
+        if(sectionTestRepository.existsByTestSectionTitle(sectionTestDto.getTestSectionTitle()))
+        {
+            throw new RuntimeException("Раздел с таким именем уже есть");
+        }
         SectionTest sectionTest = sectionTestMapper.toEntity(sectionTestDto);
         sectionTestRepository.save(sectionTest);
 
@@ -77,6 +69,10 @@ public class SectionTestService {
 
     public SectionTestDto updateTestSection(long id, SectionTestDto sectionTestDto)
     {
+        if(sectionTestRepository.existsByTestSectionTitle(sectionTestDto.getTestSectionTitle()))
+        {
+            throw new RuntimeException("Раздел с таким именем уже есть");
+        }
         SectionTest sectionTest = sectionTestRepository.findById(id).orElseThrow();
         sectionTest.setTestSectionTitle(sectionTestDto.getTestSectionTitle());
         sectionTestRepository.save(sectionTest);

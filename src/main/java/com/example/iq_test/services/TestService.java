@@ -68,6 +68,11 @@ public class TestService {
 
     public TestDto addTest(TestDto testDto)
     {
+        if(testRepository.existsByTestNameAndSectionTest(testDto.getTestName(),
+                sectionTestRepository.findById(testDto.getIdSectionTest()).orElseThrow()))
+        {
+            throw new RuntimeException("Тест с таким названием в выбранном разделе уже есть");
+        }
         Test test = testMapper.toEntity(testDto);
         testRepository.save(test);
 
@@ -81,6 +86,11 @@ public class TestService {
 
     public TestDto addTestToSection(TestDto testDto, long idSection)
     {
+        if(testRepository.existsByTestNameAndSectionTest(testDto.getTestName(),
+                sectionTestRepository.findById(idSection).orElseThrow()))
+        {
+            throw new RuntimeException("Тест с таким названием в разделе уже есть");
+        }
         Test test = new Test();
         test.setTestName(testDto.getTestName());
         test.setSectionTest(sectionTestRepository.findById(idSection).orElseThrow());
