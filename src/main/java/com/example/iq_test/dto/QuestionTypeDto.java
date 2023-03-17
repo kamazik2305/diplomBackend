@@ -9,6 +9,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 public class QuestionTypeDto {
+
+    @NonNull
+    private long id;
     @NotEmpty
     private String typeDescription;
 }
