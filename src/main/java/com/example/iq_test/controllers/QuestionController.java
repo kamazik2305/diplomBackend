@@ -29,5 +29,10 @@ public class QuestionController {
         return questionService.getQuestionTypes();
     }
 
+    @GetMapping("tests/{id_test}/question-list")
+    public List<QuestionDto> getQuestionsByTest(@PathVariable(value = "id_test") long idTest)
+    {
+        return questionService.getQuestionsByTest(idTest);
+    }
 
 }

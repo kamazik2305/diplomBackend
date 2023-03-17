@@ -27,10 +27,7 @@ public class SectionTestService {
         return  sectionTestRepository
                 .findAll()
                 .stream()
-                .map(sectionTest -> SectionTestDto.builder()
-                        .id(sectionTest.getId())
-                        .testSectionTitle(sectionTest.getTestSectionTitle())
-                        .build())
+                .map(sectionTest -> sectionTestMapper.toDto(sectionTest))
                 .toList();
     }
 
@@ -44,9 +41,7 @@ public class SectionTestService {
         return sectionTestRepository
                 .findAllByTestSectionTitleContains(searchString)
                 .stream()
-                .map(sectionTest -> SectionTestDto.builder()
-                        .testSectionTitle(sectionTest.getTestSectionTitle())
-                        .build())
+                .map(sectionTest -> sectionTestMapper.toDto(sectionTest))
                 .toList();
     }
 
@@ -60,11 +55,7 @@ public class SectionTestService {
         SectionTest sectionTest = sectionTestMapper.toEntity(sectionTestDto);
         sectionTestRepository.save(sectionTest);
 
-        return SectionTestDto
-                .builder()
-                .id(sectionTest.getId())
-                .testSectionTitle(sectionTest.getTestSectionTitle())
-                .build();
+        return sectionTestMapper.toDto(sectionTest);
     }
 
     public SectionTestDto updateTestSection(long id, SectionTestDto sectionTestDto)

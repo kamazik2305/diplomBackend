@@ -42,17 +42,14 @@ public class QuestionService {
                 .toList();
     }
 
-//    public List<QuestionDto> getQuestionsByTest(long idTest)
-//    {
-//        return questionRepository
-//                .findAllByTest(testRepository.findById(idTest))
-//                .stream()
-//                .map(question ->QuestionDto.builder()
-//                        .idQuestion(question.getId())
-//                        .questionText(question.getQuestionText())
-//                        .idTest(question.getTest())
-//                        .idQuestionType(question.g))
-//    }
+    public List<QuestionDto> getQuestionsByTest(long idTest)
+    {
+        return questionRepository
+                .findAllByTest(testRepository.findById(idTest))
+                .stream()
+                .map(question -> questionMapper.toDto(question))
+                .toList();
+    }
 
 
 

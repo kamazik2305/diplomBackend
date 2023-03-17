@@ -26,11 +26,7 @@ public class TestService {
         return testRepository
                 .findAll()
                 .stream()
-                .map(test -> TestDto.builder()
-                        .idTest(test.getId())
-                        .testName(test.getTestName())
-                        .idSectionTest(test.getSectionTest().getId())
-                        .build())
+                .map(test -> testMapper.toDto(test))
                 .toList();
     }
 
@@ -39,11 +35,7 @@ public class TestService {
         return testRepository
                 .findAllByTestNameContains(searchString)
                 .stream()
-                .map(test -> TestDto.builder()
-                        .idTest(test.getId())
-                        .testName(test.getTestName())
-                        .idSectionTest(test.getSectionTest().getId())
-                        .build())
+                .map(test -> testMapper.toDto(test))
                 .toList();
     }
 
@@ -57,11 +49,7 @@ public class TestService {
         return testRepository
                 .findAllBySectionTest(sectionTestRepository.findById(idSection).get())
                 .stream()
-                .map(test -> TestDto.builder()
-                        .idTest(test.getId())
-                        .testName(test.getTestName())
-                        .idSectionTest(test.getSectionTest().getId())
-                        .build())
+                .map(test -> testMapper.toDto(test))
                 .toList();
     }
 
@@ -76,12 +64,7 @@ public class TestService {
         Test test = testMapper.toEntity(testDto);
         testRepository.save(test);
 
-        return  TestDto
-                .builder()
-                .idTest(test.getId())
-                .testName(test.getTestName())
-                .idSectionTest(test.getSectionTest().getId())
-                .build();
+        return  testMapper.toDto(test);
     }
 
     public TestDto addTestToSection(TestDto testDto, long idSection)
