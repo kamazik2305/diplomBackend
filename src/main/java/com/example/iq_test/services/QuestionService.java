@@ -2,6 +2,7 @@ package com.example.iq_test.services;
 
 import com.example.iq_test.dto.AnswerVersionDto;
 import com.example.iq_test.dto.QuestionDto;
+import com.example.iq_test.dto.QuestionTypeDto;
 import com.example.iq_test.mapper.QuestionMapper;
 import com.example.iq_test.models.*;
 import com.example.iq_test.repositories.*;
@@ -28,5 +29,31 @@ public class QuestionService {
     private QuestionTypeRepository questionTypeRepository;
     @Autowired
     private QuestionMapper questionMapper;
+
+    public List<QuestionTypeDto> getQuestionTypes()
+    {
+        return  questionTypeRepository
+                .findAll()
+                .stream()
+                .map(QuestionType -> QuestionTypeDto.builder()
+                        .id(QuestionType.getId())
+                        .typeDescription(QuestionType.getTypeDescription())
+                        .build())
+                .toList();
+    }
+
+//    public List<QuestionDto> getQuestionsByTest(long idTest)
+//    {
+//        return questionRepository
+//                .findAllByTest(testRepository.findById(idTest))
+//                .stream()
+//                .map(question ->QuestionDto.builder()
+//                        .idQuestion(question.getId())
+//                        .questionText(question.getQuestionText())
+//                        .idTest(question.getTest())
+//                        .idQuestionType(question.g))
+//    }
+
+
 
 }

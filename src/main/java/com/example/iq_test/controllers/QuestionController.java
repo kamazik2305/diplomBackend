@@ -1,6 +1,7 @@
 package com.example.iq_test.controllers;
 
 import com.example.iq_test.dto.QuestionDto;
+import com.example.iq_test.dto.QuestionTypeDto;
 import com.example.iq_test.models.*;
 import com.example.iq_test.services.QuestionService;
 import com.example.iq_test.services.TestService;
@@ -14,11 +15,19 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
     @Autowired
     private TestService testService;
+
+    @GetMapping("/question-types")
+    public List<QuestionTypeDto> getAllTypes()
+    {
+        return questionService.getQuestionTypes();
+    }
+
 
 }
